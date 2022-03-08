@@ -1,9 +1,9 @@
-const express = require('express');
 const mysql = require('mysql2');
 const consoletable = require('console.table')
 const inquirer = require('inquirer')
 
-const PORT = process.env.PORT || 3001;
+
+const PORT = process.env.PORT || 3002;
 const app = express();
 
 // Express middleware
@@ -18,7 +18,7 @@ const db = mysql.createConnection(
     user: 'root',
     // TODO: Add MySQL password here
     password: 'password',
-    database: 'movies_db'
+    database: 'credentials_db'
   },
   console.log(`Connected to the movies_db database.`)
 );
@@ -29,10 +29,12 @@ function init() {
             type: "list",
             name: "init",
             message: "What would you like to do?",
-            choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Roles", "View All Departments","Add Department", "Quit"]
+            choices: ["View All Departments","View All Employees","View All Roles", "Add Employee", "Update Employee Role",  "Add Roles", "Add Department", "Quit"]
 
         }
     ])
-    .then(ans)
+    .then((ans) => {
+
+    })
 }
 
