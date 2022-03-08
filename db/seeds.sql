@@ -6,8 +6,8 @@ VALUES ("Sales"),
 
 
 INSERT INTO roles (title, salary, department_id)
-VALUES ("Manager", 80,1),
-       ("Salesperson", 60,1),  
+VALUES ("Manager", 80000,1),
+       ("Salesperson", 60000,1),  
        ("Software Engineer", 150000,2),
        ("Finance", 120000,3),
        ("Legal", 200000,4);
