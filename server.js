@@ -13,7 +13,7 @@ const db = mysql.createConnection(
     password: 'password',
     database: 'credentials_db'
   },
-  console.log(`Connected to the movies_db database.`)
+  console.log(`Connected to the credentials_db database.`)
 );
 
 // Init function to start with options
