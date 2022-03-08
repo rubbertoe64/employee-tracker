@@ -115,14 +115,30 @@ function addRole(){
 inquirer.prompt([
     {
       type: "input",
-      name: "newRole",
+      name: "newRoleTitle",
       message: "Insert Role you want to add."
-    }
+    },
+    {
+      type: "input",
+      name: "newSalary",
+      message: "Insert Salary for New Role(ex. 120000)"
+    },
+    {
+      type: "input",
+      name: "newDepId",
+      message: "Insert Department ID Number (Only 1-4)"
+    },
+
     
   ])
   .then((ans) => {
     console.log(ans);
-    db.query("INSERT INTO roles SET ?", {title: ans.newRole}),
+    db.query("INSERT INTO roles SET ?", 
+    {
+      title: ans.newRoleTitle,
+      salary: ans.newSalary,
+      department_id: ans.newDepId
+    }),
     
       db.query("SELECT * FROM roles", 
       
