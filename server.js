@@ -3,9 +3,6 @@ const cTable = require('console.table')
 const inquirer = require('inquirer')
 
 
-const PORT = process.env.PORT || 3002;
-
-
 // Connect to database
 const db = mysql.createConnection(
   {
@@ -19,6 +16,7 @@ const db = mysql.createConnection(
   console.log(`Connected to the movies_db database.`)
 );
 
+// Init function to start with options
 function init() {
     inquirer.prompt([
         {
@@ -29,6 +27,8 @@ function init() {
 
         }
     ])
+
+    // depending on what you choose, the code will switch to whatever function is needed
     .then((ans) => {
       switch (ans.init) {
         case "View All Departments":
@@ -59,7 +59,7 @@ function init() {
       }
     })
 }
-
+// function to View all Departments
 function viewDepartments(){
   db.query("SELECT * FROM departments", 
   function(error, res) {
@@ -68,7 +68,7 @@ function viewDepartments(){
     init();
   })
 }
-
+// Views all Rols
 function viewRoles(){
   db.query("SELECT * FROM roles", 
   function(error, res) {
@@ -77,7 +77,7 @@ function viewRoles(){
     init();
   })
 }
-
+// Views all Employees
 function viewEmployees(){
   db.query("SELECT * FROM employees", 
   function(err, res) {
@@ -86,7 +86,7 @@ function viewEmployees(){
     init();
   })
 }
-
+// Adds Departments
 function addDepartment(){
   inquirer.prompt([
     {
@@ -110,7 +110,7 @@ function addDepartment(){
     
   })
 }
-
+// Adds Role
 function addRole(){
 inquirer.prompt([
     {
@@ -134,7 +134,7 @@ inquirer.prompt([
     
   })
 }
-
+// Adds Employee
 function addEmployee(){
   inquirer.prompt([
     {
