@@ -25,7 +25,7 @@ function init() {
             type: "list",
             name: "init",
             message: "What would you like to do?",
-            choices: ["View All Departments","View All Employees","View All Roles", "Add Employee", "Update Employee Role",  "Add Role", "Add Department", "Quit"]
+            choices: ["View All Departments","View All Employees","View All Roles", "Add Employee",  "Add Role", "Add Department", "Quit"]
 
         }
     ])
@@ -49,6 +49,10 @@ function init() {
         case "Add Employee":
           addEmployee();
           break;
+        case "Quit":
+          console.log("Goodbye! Type 'CTRL + C' to exit");
+          break;
+          
       
         default:
           break;
@@ -118,7 +122,7 @@ inquirer.prompt([
   ])
   .then((ans) => {
     console.log(ans);
-    db.query("INSERT INTO roles SET ?", {name: ans.newRole}),
+    db.query("INSERT INTO roles SET ?", {title: ans.newRole}),
     
       db.query("SELECT * FROM roles", 
       
@@ -132,7 +136,49 @@ inquirer.prompt([
 }
 
 function addEmployee(){
-  
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "newEmpFirstName",
+      message: "Insert Employee's First Name"
+    },
+    {
+      type: "input",
+      name: "newEmpLastName",
+      message: "Insert Employee's Last Name"
+    },
+    {
+      type: "input",
+      name: "newRoleId",
+      message: "Insert Employee Role ID Number."
+    },
+    {
+      type: "input",
+      name: "newManagerId",
+      message: "Insert Employee's Manager ID Number"
+    },
+    
+  ])
+  .then((ans) => {
+    console.log(ans);
+    db.query("INSERT INTO employees SET ?", 
+    {
+      first_name: ans.newEmpFirstName,
+      last_name: ans.newEmpLastName,
+      roles_id: ans.newRoleId,
+      manager_id: ans.newManagerId
+    }),
+    
+      db.query("SELECT * FROM employees", 
+      
+        function(err, res) {
+          if(err) throw err;
+          console.table(res);
+          init();
+      })
+  })
 }
+
+
 
 init();
